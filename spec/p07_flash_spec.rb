@@ -1,6 +1,6 @@
 require 'rack'
-require 'flash'
-require 'controller_base'
+require 'controller_base/flash'
+require 'controller_base/controller_base'
 
 describe Flash do
   let(:req) { Rack::Request.new({'rack.input' => {}}) }

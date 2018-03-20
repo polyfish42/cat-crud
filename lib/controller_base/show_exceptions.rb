@@ -20,7 +20,7 @@ class ShowExceptions
 
   def render_exception(e)
     error = e
-    path = "lib/templates/rescue.html.erb"
+    path = "public/templates/rescue.html.erb"
     ERB.new(File.read(path)).result(binding)
   end
 end

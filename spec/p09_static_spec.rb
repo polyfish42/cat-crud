@@ -1,5 +1,4 @@
-
-require 'static'
+require 'controller_base/static'
 require 'rack'
 
 class DummyApp

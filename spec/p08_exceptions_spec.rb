@@ -1,7 +1,7 @@
 # require 'rack/show_exceptions'
 require 'rack/lint'
 require 'rack/mock'
-require 'show_exceptions'
+require 'controller_base/show_exceptions'
 
 describe ShowExceptions do
   let(:show_exceptions) { ShowExceptions.new(app) }

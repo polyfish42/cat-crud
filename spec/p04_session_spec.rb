@@ -1,6 +1,6 @@
 require 'rack'
-require 'session'
-require 'controller_base'
+require 'controller_base/session'
+require 'controller_base/controller_base'
 
 describe Session do
   let(:req) { Rack::Request.new({ 'rack.input' => {} }) }

@@ -1,5 +1,5 @@
 require 'rack'
-require 'controller_base'
+require 'controller_base/controller_base'
 
 describe ControllerBase do
   before(:all) do

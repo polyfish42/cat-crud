@@ -1,6 +1,6 @@
 require 'rack'
-require 'router'
-require 'controller_base'
+require 'controller_base/router'
+require 'controller_base/controller_base'
 
 describe Route do
   let(:req) { Rack::Request.new({'rack.input' => {}}) }

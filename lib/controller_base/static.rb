@@ -15,7 +15,7 @@ class Static
       match_data = regex.match(path)
 
       begin
-        content = File.read("lib/public/#{match_data[:path]}")
+        content = File.read("app/public/#{match_data[:path]}")
       rescue
         return [404, {"Content-type" => "text/html"}, "<h1>Sorry, we couldn't find that.</h1>"]
       end
