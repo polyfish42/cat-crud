@@ -1,13 +1,13 @@
 require 'rack'
 require_relative '../lib/controller_base/router'
-require_relative '../app/controllers/dogs_controller'
+require_relative '../app/controllers/cats_controller'
 
 router = Router.new
 router.draw do
-  get Regexp.new("^/dogs$"), DogsController, :index
-  get Regexp.new("^/dogs/new$"), DogsController, :new
-  get Regexp.new("^/dogs/(?<id>\\d+)$"), DogsController, :show
-  post Regexp.new("^/dogs$"), DogsController, :create
+  get Regexp.new("^/cats$"), CatsController, :index
+  get Regexp.new("^/cats/new$"), CatsController, :new
+  get Regexp.new("^/cats/(?<id>\\d+)$"), CatsController, :show
+  post Regexp.new("^/cats$"), CatsController, :create
 end
 
 app = Proc.new do |env|

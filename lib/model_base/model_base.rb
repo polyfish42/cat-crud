@@ -1,5 +1,7 @@
 require_relative 'db_connection'
 require 'active_support/inflector'
+require_relative 'associatable'
+require_relative 'searchable'
 
 class ModelBase
   def self.columns
