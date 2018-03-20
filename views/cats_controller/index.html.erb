@@ -3,11 +3,13 @@
   <tr>
     <th>Name</th>
     <th>Owner</th>
+    <th>Address</th>
   </tr>
   <% @cats.each do |cat| %>
   <tr>
     <th><%= cat.name %></th>
     <th><%= cat.owner ? cat.owner.fname : "" %></th>
+    <th><%= cat.home ? cat.home.address : "" %></th>
   </tr>
   <% end %>
 </table>

@@ -98,7 +98,7 @@ module Associatable
         ON
           #{source_options.foreign_key} = #{source_options.table_name}.#{source_options.primary_key}
         WHERE
-          #{through_options.table_name}.#{through_options.primary_key} = #{self.send(through_options.primary_key)}
+          #{through_options.table_name}.#{through_options.primary_key} = #{self.send(through_options.foreign_key)}
         SQL
         source_options.model_class.send(:new, results.first)
     end
