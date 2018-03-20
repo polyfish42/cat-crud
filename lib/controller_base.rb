@@ -8,12 +8,46 @@ require 'active_support/inflector'
 class ControllerBase
   attr_reader :req, :res, :params
 
+  def self.before_actions
+    @before_actions ||= []
+  end
+
+  def self.before_action(callback)
+    before_actions << callback
+  end
+
+  def self.inherited(child)
+    before_actions.each {|c| child.before_actions << c}
+  end
+
+  def self.protect_from_forgery
+    before_action :protect_from_forgery
+  end
+
   # Setup the controller
   def initialize(req, res, params = {})
     @req = req
     @res = res
     @params = params
     @already_built_response = false
+  end
+
+  def form_authenticity_token
+    @token ||= SecureRandom.urlsafe_base64
+    @res.set_cookie("authenticity_token", path: '/', value: @token)
+    @token
+  end
+
+  def protect_from_forgery
+    unless @req.get?
+      check_authenticity_token
+    end
+  end
+
+  def check_authenticity_token
+    unless @params['authenticity_token'] && @params['authenticity_token'] == @req.cookies['authenticity_token']
+      raise "Invalid authenticity token"
+    end
   end
 
   # Helper method to alias @already_built_response
@@ -71,8 +105,8 @@ class ControllerBase
 
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
+    self.class.before_actions.each {|callback| send(callback)}
     self.send(name)
-
     render name unless already_built_response?
   end
 end

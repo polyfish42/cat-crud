@@ -53,7 +53,6 @@ class FlashNow
   end
 
   def [](key)
-    debugger
     @store[key]
   end
 
