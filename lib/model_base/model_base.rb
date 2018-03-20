@@ -110,7 +110,7 @@ class ModelBase
       VALUES
         (#{question_marks})
     SQL
-
+    
     self.id = DBConnection.last_insert_row_id
     self
   end

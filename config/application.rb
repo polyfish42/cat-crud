@@ -3,8 +3,6 @@ require_relative '../lib/controller_base/router'
 require_relative '../app/controllers/cats_controller'
 require_relative '../lib/model_base/db_connection'
 
-DBConnection.reset
-
 router = Router.new
 router.draw do
   get Regexp.new("^/cats$"), CatsController, :index

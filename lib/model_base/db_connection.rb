@@ -25,9 +25,10 @@ class DBConnection
   end
 
   def self.instance
-    reset if @db.nil?
-
-    @db
+    # reset if @db.nil?
+    #
+    # @db
+    DBConnection.open(CATS_DB_FILE)
   end
 
   def self.execute(*args)
