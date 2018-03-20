@@ -17,7 +17,9 @@ class CatsController < ControllerBase
   end
 
   def create
-    @cat = Cat.attributes(params["cat"])
+    @cat = Cat.new
+    @cat.instance_variable_set('@attributes', params["cat"])
+
     if @cat.save
       flash[:notice] = "Saved cat successively"
       redirect_to "/cats"
