@@ -1,3 +1,4 @@
-# Lyle
+Built with [Lyle](https://github.com/polyfish42/lyle)
 
-"Do not underestimate objects!" - Lyle, Inifinite Jest
+Get Started
+
