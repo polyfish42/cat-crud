@@ -15,4 +15,4 @@ Run the server
 ruby config/application.rb
 ```
 
-Go to your browser and navigate to localhost:3000/cats
+Go to your browser and navigate to [localhost:3000/cats](localhost:3000/cats)
