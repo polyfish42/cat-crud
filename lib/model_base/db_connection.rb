@@ -1,4 +1,3 @@
-require 'sqlite3'
 require 'pg'
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'

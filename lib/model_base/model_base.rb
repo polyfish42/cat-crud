@@ -102,7 +102,6 @@ class ModelBase
   def insert
     cols = self.class.columns - [:id]
     col_names = cols.join(",")
-    # question_marks = Array.new(cols.length, "?").join(",")
     question_marks = Array.new(cols.length).map.with_index {|_, i| "$#{i + 1}"}.join(",")
     
     id = DBConnection.execute(<<-SQL, attribute_values)
@@ -120,7 +119,6 @@ class ModelBase
 
   def update
     cols = self.class.columns.reject {|k, _| k == :id}
-    # set_clause = cols.map {|k, v| "#{k} = ?"}.join(",")
     set_clause = cols.map.with_index {|(k, _), i| "#{k} = ?"}.join(",")
     
     result = DBConnection.execute(<<-SQL, attribute_values.rotate)
