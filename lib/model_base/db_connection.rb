@@ -7,7 +7,7 @@ DB_NAME = ENV['DATABASE_URL']
 
 class DBConnection
   def self.open(db_name)
-    @db = PG::Connection.open(dbname: db_name)
+    @db = PG::Connection.new(db_name)
     @db
   end
 
