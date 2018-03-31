@@ -7,19 +7,18 @@ DB_NAME = ENV['DATABASE_URL']
 
 class DBConnection
   def self.open(db_name)
-    PG::Connection.new(db_name)
     @db = PG::Connection.open(dbname: db_name)
     @db
   end
 
   def self.reset
-    commands = [
-      "dropdb '#{DB_NAME}'",
-      "createdb '#{DB_NAME}'",
-      "psql  '#{DB_NAME}' <  '#{SQL_FILE}'"
-    ]
+#    commands = [
+ #     "dropdb '#{DB_NAME}'",
+  #    "createdb '#{DB_NAME}'",
+   #   "psql  '#{DB_NAME}' <  '#{SQL_FILE}'"
+   # ]
   
-    commands.each { |command| `#{command}` }
+    #commands.each { |command| `#{command}` }
     DBConnection.open(DB_NAME)
   end
 
