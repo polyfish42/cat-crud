@@ -1,7 +1,7 @@
 require 'rack'
-require_relative '../lib/controller_base/router'
-require_relative '../app/controllers/cats_controller'
-require_relative '../lib/model_base/db_connection'
+require_relative './lib/controller_base/router'
+require_relative './app/controllers/cats_controller'
+require_relative './lib/model_base/db_connection'
 
 router = Router.new
 router.draw do
