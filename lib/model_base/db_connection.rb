@@ -3,7 +3,7 @@ require 'pg'
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
 SQL_FILE = File.join(ROOT_FOLDER, 'cats.sql')
-DB_NAME = File.join('lyle-test')
+DB_NAME = ENV['DATABASE_URL']
 
 class DBConnection
   def self.open(db_name)
