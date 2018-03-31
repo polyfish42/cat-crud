@@ -8,13 +8,13 @@ class ModelBase
     if @columns
       @columns
     else
-      table = DBConnection.execute2(<<-SQL)
+      table = DBConnection.execute(<<-SQL)
         SELECT
           *
         FROM
           #{self.table_name}
       SQL
-      @columns = table[0].map(&:to_sym)
+      @columns = table.fields.map(&:to_sym)
     end
   end
 
@@ -83,7 +83,7 @@ class ModelBase
   def initialize(params = {})
     params.each do |(attr_name, value)|
       sym = attr_name.to_sym
-
+      
       raise "unknown attribute '#{attr_name}'" unless self.class.columns.include?(sym)
 
       setter = "#{attr_name}=".to_sym
@@ -102,24 +102,28 @@ class ModelBase
   def insert
     cols = self.class.columns - [:id]
     col_names = cols.join(",")
-    question_marks = Array.new(cols.length, "?").join(",")
-
-    result = DBConnection.execute(<<-SQL, *attribute_values)
+    # question_marks = Array.new(cols.length, "?").join(",")
+    question_marks = Array.new(cols.length).map.with_index {|_, i| "$#{i + 1}"}.join(",")
+    
+    id = DBConnection.execute(<<-SQL, attribute_values)
       INSERT INTO
         #{self.class.table_name} (#{col_names})
       VALUES
         (#{question_marks})
+      RETURNING
+        id
     SQL
     
-    self.id = DBConnection.last_insert_row_id
+    self.id = id
     self
   end
 
   def update
     cols = self.class.columns.reject {|k, _| k == :id}
-    set_clause = cols.map {|k, v| "#{k} = ?"}.join(",")
-
-    result = DBConnection.execute(<<-SQL, *attribute_values.rotate)
+    # set_clause = cols.map {|k, v| "#{k} = ?"}.join(",")
+    set_clause = cols.map.with_index {|(k, _), i| "#{k} = ?"}.join(",")
+    
+    result = DBConnection.execute(<<-SQL, attribute_values.rotate)
       UPDATE
         #{self.class.table_name}
       SET
