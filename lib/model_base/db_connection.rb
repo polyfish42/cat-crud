@@ -12,13 +12,13 @@ class DBConnection
   end
 
   def self.reset
-    commands = [
-      "dropdb '#{DB_NAME}'",
-      "createdb '#{DB_NAME}'",
-      "psql  '#{DB_NAME}' <  '#{SQL_FILE}'"
-    ]
+#    commands = [
+      #"dropdb '#{DB_NAME}'",
+     # "createdb '#{DB_NAME}'",
+    #  "psql  '#{DB_NAME}' <  '#{SQL_FILE}'"
+   # ]
   
-    commands.each { |command| `#{command}` }
+   # commands.each { |command| `#{command}` }
     DBConnection.open(DB_NAME)
   end
 
