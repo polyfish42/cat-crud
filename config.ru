@@ -11,9 +11,11 @@ router.draw do
   post Regexp.new("^/cats$"), CatsController, :create
 end
 
-Proc.new do |env|
+app = Proc.new do |env|
   req = Rack::Request.new(env)
   res = Rack::Response.new
   router.run(req, res)
   res.finish
 end
+
+run app
