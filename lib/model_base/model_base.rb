@@ -75,7 +75,7 @@ class ModelBase
         #{self.table_name}.id = #{id}
     SQL
 
-    return nil if result.empty?
+    return nil if result.values.empty?
 
     self.new(result[0])
   end
@@ -119,7 +119,7 @@ class ModelBase
 
   def update
     cols = self.class.columns.reject {|k, _| k == :id}
-    set_clause = cols.map.with_index {|(k, _), i| "#{k} = ?"}.join(",")
+    set_clause = cols.map.with_index {|(k, _), i| "#{k} = $#{i + 1}"}.join(",")
     
     result = DBConnection.execute(<<-SQL, attribute_values.rotate)
       UPDATE
@@ -127,7 +127,7 @@ class ModelBase
       SET
         #{set_clause}
       WHERE
-        id = ?
+        id = $#{cols.length + 1}
     SQL
   end
 
@@ -137,5 +137,14 @@ class ModelBase
     else
       update
     end
+  end
+
+  def delete
+    DBConnection.execute(<<-SQL, [self.id])
+      DELETE FROM
+        #{self.class.table_name}
+      WHERE
+        id = $1
+    SQL
   end
 end

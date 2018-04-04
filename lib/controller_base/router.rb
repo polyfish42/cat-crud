@@ -13,15 +13,13 @@ class Route
   end
 
   def run(req, res)
-    # params = @pattern.match(req.path)
-    # params_hash = {}
-
-    # params.names.each do |name|
-    #   params_hash[name] = params[name]
-    # end
-
     params = Rack::Utils.parse_nested_query req.body.read
+    url_params = @pattern.match(req.path)
 
+    url_params.names.each do |name|
+      params[name] = url_params[name]
+    end
+    
     controller = @controller_class.new(req, res, params)
     controller.invoke_action(@action_name.to_sym)
   end

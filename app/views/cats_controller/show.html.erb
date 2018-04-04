@@ -1,0 +1,16 @@
+<h1><%= @cat.name %></h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Owner</th>
+    <th>Address</th>
+  </tr>
+  <tr>
+    <td><%= @cat.name %></td>
+    <td><%= @cat.owner.fname %> <%= @cat.owner.lname %></td>
+    <td><%= @cat.home.address %></dt>
+  </tr>
+</table>
+
+<a href="/cats/<%= @cat.id %>/edit">Edit</a>
+<a href="/cats">All Cats</a>

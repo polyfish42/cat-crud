@@ -1,16 +1,12 @@
 <h1>ALL THE CATS</h1>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Owner</th>
-    <th>Address</th>
-  </tr>
+<ul>
   <% @cats.each do |cat| %>
-  <tr>
-    <th><%= cat.name %></th>
-    <th><%= cat.owner ? cat.owner.fname : "" %></th>
-    <th><%= cat.home ? cat.home.address : "" %></th>
-  </tr>
+  <li><%= cat.name %> <button onClick="window.location.href='/cats/<%= cat.id %>'">Show</button> <button onClick="window.location.href='/cats/<%= cat.id %>/edit'">Edit</button>
+    <form action="/cats/<%= cat.id %>/delete" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <button>Delete</button>
+    </form>
+  </li>
   <% end %>
-</table>
+</ul>
 <a href="/cats/new">New cat!</a>

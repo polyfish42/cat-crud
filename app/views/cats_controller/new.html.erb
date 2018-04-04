@@ -1,4 +1,8 @@
-<form action="/cats" method="POST">
+<% action = (@cat.id ? "/cats/#{@cat.id}" : "/cats") %>
+<% method = (@cat.id ? "PUT" : "POST")%>
+
+<form action="<%= action %>" method="POST">
+  <input type="hidden" name="_method" value="<%= method %>">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label>Name
@@ -6,7 +10,15 @@
   </label>
 
   <label>Owner
-    <input type="text" name="cat[owner]" value="<%= @cat.owner %>">
+    <select name="cat[owner]">
+      <% Human.all.each do |h| %>
+      <% selected = h.id == @cat.owner_id %>
+      <option <%= selected ? "selected" : "" %>
+              value="<%= h.id %>">
+	<%= h.fname %>
+      </option>
+      <% end %>
+      </select>
   </label>
 
   <input type="submit">

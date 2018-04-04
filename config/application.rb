@@ -8,7 +8,10 @@ router.draw do
   get Regexp.new("^/cats$"), CatsController, :index
   get Regexp.new("^/cats/new$"), CatsController, :new
   get Regexp.new("^/cats/(?<id>\\d+)$"), CatsController, :show
+  get Regexp.new("^/cats/(?<id>\\d+)/edit$"), CatsController, :edit
   post Regexp.new("^/cats$"), CatsController, :create
+  post Regexp.new("^/cats/(?<id>\\d+)/delete"), CatsController, :destroy
+  post Regexp.new("^/cats/(?<id>\\d+)"), CatsController, :update
 end
 
 app = Proc.new do |env|

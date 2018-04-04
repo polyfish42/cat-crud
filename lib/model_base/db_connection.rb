@@ -3,22 +3,22 @@ require 'pg'
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
 SQL_FILE = File.join(ROOT_FOLDER, 'cats.sql')
-DB_NAME = ENV['DATABASE_URL']
+DB_NAME = "lyle-test"
 
 class DBConnection
   def self.open(db_name)
-    @db = PG::Connection.new(db_name)
+    @db = PG::Connection.connect(dbname: db_name)
     @db
   end
 
   def self.reset
-#    commands = [
- #     "dropdb '#{DB_NAME}'",
-  #    "createdb '#{DB_NAME}'",
-   #   "psql  '#{DB_NAME}' <  '#{SQL_FILE}'"
-   # ]
+    commands = [
+    "dropdb '#{DB_NAME}'",
+    "createdb '#{DB_NAME}'",
+    "psql  '#{DB_NAME}' <  '#{SQL_FILE}'"
+    ]
   
-    #commands.each { |command| `#{command}` }
+    commands.each { |command| `#{command}` }
     DBConnection.open(DB_NAME)
   end
 
