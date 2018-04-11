@@ -1,6 +1,18 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.notice, .error {
+  padding: 2px;
+  background-color: white;
+}
+
+.notice {
+  border: 5px solid green;
+}
+
+.error {
+  border: 5px solid red;
+}
 
 .main {
   margin: 0 auto;
