@@ -1,25 +1,38 @@
-<% action = (@cat.id ? "/cats/#{@cat.id}" : "/cats") %>
-<% method = (@cat.id ? "PUT" : "POST")%>
+<html>
 
-<form action="<%= action %>" method="POST">
-  <input type="hidden" name="_method" value="<%= method %>">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<head>
+  <link rel="stylesheet" type="text/css" href="../../public/styles.css">
+</head>
 
-  <label>Name
-    <input type="text" name="cat[name]" value="<%= @cat.name %>">
-  </label>
+<body>
+  <div class="main">
+    <% action = (@cat.id ? "/cats/#{@cat.id}" : "/cats") %>
+      <% method = (@cat.id ? "PUT" : "POST")%>
 
-  <label>Owner
-    <select name="cat[owner]">
-      <% Human.all.each do |h| %>
-      <% selected = h.id == @cat.owner_id %>
-      <option <%= selected ? "selected" : "" %>
-              value="<%= h.id %>">
-	<%= h.fname %>
-      </option>
-      <% end %>
-      </select>
-  </label>
+        <form action="<%= action %>" method="POST">
+          <input type="hidden" name="_method" value="<%= method %>">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  <input type="submit">
-</form>
+          <label>Name
+            <input type="text" name="cat[name]" value="<%= @cat.name %>">
+          </label>
+
+          <label>Owner
+            <select name="cat[owner]">
+              <% Human.all.each do |h| %>
+                <% selected = h.id == @cat.owner_id %>
+                  <option <%= selected ? "selected" : "" %>
+                    value="
+                    <%= h.id %>">
+                      <%= h.fname %>
+                  </option>
+                  <% end %>
+            </select>
+          </label>
+
+          <input type="submit">
+        </form>
+  </div>
+</body>
+
+</html>
