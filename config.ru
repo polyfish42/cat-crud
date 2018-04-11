@@ -1,6 +1,6 @@
 require 'rack'
 require_relative './lib/controller_base/router'
-require_relative '../lib/controller_base/static'
+require_relative './lib/controller_base/static'
 require_relative './app/controllers/cats_controller'
 require_relative './lib/model_base/db_connection'
 
