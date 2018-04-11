@@ -1,12 +1,35 @@
-<h1>ALL THE CATS</h1>
-<ul>
-  <% @cats.each do |cat| %>
-  <li><%= cat.name %> <button onClick="window.location.href='/cats/<%= cat.id %>'">Show</button> <button onClick="window.location.href='/cats/<%= cat.id %>/edit'">Edit</button>
-    <form action="/cats/<%= cat.id %>/delete" method="POST">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <button>Delete</button>
-    </form>
-  </li>
-  <% end %>
-</ul>
-<a href="/cats/new">New cat!</a>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../public/styles.css">
+</head>
+
+<body>
+  <div class="main">
+    <h1>Cat Index</h1>
+    <table>
+      <% @cats.each do |cat| %>
+        <tr>
+          <td class="index__table-name">
+            <%= cat.name %>
+          </td>
+          <td>
+            <button onClick="window.location.href='/cats/<%= cat.id %>'">Show</button>
+          </td>
+          <td>
+            <button onClick="window.location.href='/cats/<%= cat.id %>/edit'">Edit</button>
+          </td>
+          <td>
+            <form class="index__delete" action="/cats/<%= cat.id %>/delete" method="POST">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <button>Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% end %>
+    </table>
+    <a class="index__new-cat-link" href="/cats/new">New cat</a>
+  </div>
+</body>
+
+</html>

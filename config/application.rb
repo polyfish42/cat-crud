@@ -1,5 +1,6 @@
 require 'rack'
 require_relative '../lib/controller_base/router'
+require_relative '../lib/controller_base/static'
 require_relative '../app/controllers/cats_controller'
 require_relative '../lib/model_base/db_connection'
 
@@ -20,6 +21,11 @@ app = Proc.new do |env|
   router.run(req, res)
   res.finish
 end
+
+app = Rack::Builder.new do
+  use Static
+  run app
+end.to_app
 
 Rack::Server.start(
  app: app,

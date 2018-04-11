@@ -1,0 +1,29 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.main {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 500px;
+  background: rgba(240,130,134,0.6);
+  padding: 20px 40px 0px 40px;
+  height: 800px;
+}
+
+.index__table-name {
+  width: 400px;
+}
+
+.index__delete {
+  display: inline;
+}
+
+.index__new-cat-link {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.show__table {
+  border-spacing: 15px;
+}
